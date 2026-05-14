@@ -210,106 +210,152 @@
 <body>
 
  
-  <section class="hero-policy">
+  <section class="hero">
 
     <div class="container">
 
       <div class="badge">
-        Cookies & Tracking
+        Developer Platform
       </div>
 
       <h1 class="hero-title">
-        Cookie
-        <span class="gradient-text">Policy</span>
+        API
+        <span class="gradient-text">Reference</span>
       </h1>
 
       <p class="hero-desc">
-        This Cookie Policy explains how our Society Management Platform uses cookies, analytics tools, and similar technologies to improve security, performance, and user experience.
+        Integrate society management services, visitor systems, maintenance operations, resident modules, and smart security workflows using our secure enterprise-grade APIs.
       </p>
 
     </div>
 
   </section>
 
-  <section class="wrapper">
+  <section class="api-section">
 
     <div class="container">
 
-      <div class="card">
+      <div class="api-card">
 
-        <div class="section">
+        <div class="api-block">
 
-          <h2>What Are Cookies?</h2>
+          <div class="tag">
+            Authentication API
+          </div>
 
-          <p>
-            Cookies are small text files stored on your device when you access our platform. They help improve website functionality, user authentication, performance optimization, and personalized experiences.
+          <h2 class="api-title">
+            Generate Access Token
+          </h2>
+
+          <p class="api-desc">
+            Securely authenticate API requests using bearer token authorization.
           </p>
 
-        </div>
+          <div class="endpoint">
+            <span class="method">POST</span>
+            /api/v1/auth/token
+          </div>
 
-        <div class="section">
-
-          <h2>How We Use Cookies</h2>
-
-          <ul>
-            <li>Secure user login and session management.</li>
-            <li>Remember resident preferences and settings.</li>
-            <li>Improve dashboard performance and loading speed.</li>
-            <li>Analyze platform usage and operational insights.</li>
-            <li>Enhance security monitoring and fraud prevention.</li>
-          </ul>
-
-          <div class="highlight">
-            We use cookies responsibly and never use tracking technologies for unauthorized data selling or harmful advertising practices.
+          <div class="code-block">
+{
+  "email": "admin@societyapp.com",
+  "password": "your-password"
+}
           </div>
 
         </div>
 
-        <div class="section">
+        <div class="api-block">
 
-          <h2>Types of Cookies We Use</h2>
+          <div class="tag">
+            Visitor Management API
+          </div>
 
-          <ul>
-            <li><strong>Essential Cookies:</strong> Required for secure platform functionality.</li>
-            <li><strong>Analytics Cookies:</strong> Help understand user interaction and performance.</li>
-            <li><strong>Preference Cookies:</strong> Save language, theme, and user settings.</li>
-            <li><strong>Security Cookies:</strong> Detect suspicious activity and unauthorized access attempts.</li>
-          </ul>
+          <h2 class="api-title">
+            Create Visitor Entry
+          </h2>
 
-        </div>
-
-        <div class="section">
-
-          <h2>Managing Cookies</h2>
-
-          <p>
-            Users may manage or disable cookies through browser settings. However, disabling certain cookies may affect platform functionality, login systems, and security operations.
+          <p class="api-desc">
+            Register and manage visitor access with OTP and QR verification support.
           </p>
 
+          <div class="endpoint">
+            <span class="method">POST</span>
+            /api/v1/visitors/create
+          </div>
+
+          <div class="code-block">
+{
+  "visitor_name": "Rahul Sharma",
+  "mobile": "+91XXXXXXXXXX",
+  "flat_number": "A-302",
+  "purpose": "Delivery"
+}
+          </div>
+
         </div>
 
-        <div class="section">
+        <div class="api-block">
 
-          <h2>Third-Party Services</h2>
+          <div class="tag">
+            Resident API
+          </div>
 
-          <p>
-            Some services such as analytics providers, payment gateways, or authentication systems may use their own cookies in accordance with their respective privacy policies.
+          <h2 class="api-title">
+            Fetch Resident Details
+          </h2>
+
+          <p class="api-desc">
+            Retrieve resident profile and apartment information securely.
           </p>
 
+          <div class="endpoint">
+            <span class="method">GET</span>
+            /api/v1/residents/{id}
+          </div>
+
         </div>
 
-        <div class="section">
+        <div class="api-block">
 
-          <h2>Policy Updates</h2>
+          <div class="tag">
+            Maintenance API
+          </div>
 
-          <p>
-            We may update this Cookie Policy periodically to reflect technological, operational, or legal changes. Continued use of the platform indicates acceptance of updated policies.
+          <h2 class="api-title">
+            Generate Maintenance Invoice
+          </h2>
+
+          <p class="api-desc">
+            Automate maintenance billing and payment workflows.
           </p>
 
+          <div class="endpoint">
+            <span class="method">POST</span>
+            /api/v1/maintenance/invoice
+          </div>
+
         </div>
 
-        <div class="footer-note">
-          Last Updated: May 2026 • Society Management Platform
+        <div class="api-block">
+
+          <div class="tag">
+            Security API
+          </div>
+
+          <h2 class="api-title">
+            Smart Gate Access Logs
+          </h2>
+
+          <p class="api-desc">
+            Monitor real-time entry and exit activity across society premises.
+          </p>
+
+          <div class="endpoint">
+            <span class="method">GET</span>
+            /api/v1/security/logs
+          </div>
+
         </div>
 
       </div>

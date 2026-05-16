@@ -846,5 +846,118 @@
 </footer>
 
 <script src="./js/script.js"></script>
+    <script>
+
+(function () {
+    const root = document.documentElement;
+    const focusableSelector = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [contenteditable], [tabindex]:not([tabindex="-1"])';
+  
+    let lastFocused = null;
+    let activeDialog = null;
+  
+    // Helper: prevent scroll and pause Lenis
+    const lockScroll = () => {
+      root.classList.add('no-scroll');
+      lenis.stop();
+    };
+  
+    // Helper: restore scroll and resume Lenis
+    const unlockScroll = () => {
+      root.classList.remove('no-scroll');
+      lenis.start();
+    };
+  
+    // Trap focus within dialog
+    function trapFocus(event) {
+      if (!activeDialog) return;
+      const focusables = Array.from(activeDialog.querySelectorAll(focusableSelector));
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+  
+      if (event.key === 'Tab') {
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      } else if (event.key === 'Escape') {
+        event.preventDefault();
+        closeDialog(activeDialog);
+      }
+    }
+  
+    function openDialog(dialog) {
+      if (!(dialog instanceof HTMLDialogElement)) return;
+  
+      lastFocused = document.activeElement;
+      activeDialog = dialog;
+      dialog.showModal();
+  
+      lockScroll();
+     
+      // Focus first focusable element
+      const firstFocusable = dialog.querySelector(focusableSelector);
+      (firstFocusable || dialog).focus();
+      
+      setTimeout(() => {
+        firstFocusable.focus();
+      }, 900);
+  
+      document.addEventListener('keydown', trapFocus);
+    }
+  
+    function closeDialog(dialog) {
+      if (!(dialog instanceof HTMLDialogElement)) return;
+      
+      dialog.close();
+      unlockScroll();
+  
+      // Restore focus
+      if (lastFocused) lastFocused.focus();
+  
+      document.removeEventListener('keydown', trapFocus);
+      activeDialog = null;
+    }
+  
+    // Open dialog on trigger click
+    document.addEventListener('click', (e) => {
+      const trigger = e.target.closest('.dialog-open-trigger');
+      if (!trigger) return;
+  
+      const dialogId = trigger.getAttribute('aria-controls');
+      const dialog = document.getElementById(dialogId);
+      if (dialog) {
+        e.preventDefault();
+        openDialog(dialog);
+      }
+    });
+  
+    // Close dialog on .dialog-close-trigger click
+    document.addEventListener('click', (e) => {
+      const closeBtn = e.target.closest('.dialog-close-trigger');
+      if (!closeBtn) return;
+  
+      const dialog = closeBtn.closest('.c-dialog');
+      if (dialog) {
+        e.preventDefault();
+        closeDialog(dialog);
+      }
+    });
+  
+    // Close when clicking backdrop
+    document.querySelectorAll('.c-dialog').forEach((dialog) => {
+      dialog.addEventListener('click', (e) => {
+        const panel = dialog.querySelector('.c-dialog__panel');
+        if (panel && !panel.contains(e.target)) {
+          closeDialog(dialog);
+        }
+      });
+    });
+  })();
+
+</script>
 </body>
 </html>
